@@ -9,7 +9,7 @@ format short e
 
 x0 = 0; x1 = 1;   % start and end point
 L = x1 - x0;      % total length
-N = 8;            % number of interval
+N = 9;            % number of interval
 dx = L/N;         % interval size
 
 % test case 1 condition
@@ -48,5 +48,5 @@ disp(error);
 figure
 plot(x,u);
 hold on
-plot(x,u_exact,'r-');
+%plot(x,u_exact,'r-');
 hold off
