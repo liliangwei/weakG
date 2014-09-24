@@ -53,7 +53,7 @@ epsilon2 = [1,0,0,0;0,0,0,-1];
 epsilon3 = [0,0,0;1,0,0];
 
 % Matrix G 
-G = -epsilon1*R1-epsilon2*R2-epsilon3*R3;
+G = [-epsilon2*R2];
 
 % Vector e 
 e = -dot(R2,f2);
