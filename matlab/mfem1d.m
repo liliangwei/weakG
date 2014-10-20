@@ -1,4 +1,4 @@
-% 1D Poisson equation mixed finite element method
+% 1D Laplace equation weak Galerkin finite element method
 % with Lagrangian multeplier
 % Starson
 % Sep 8
@@ -12,6 +12,7 @@ L = x1 - x0;      % total length
 N = 3;          % number of interval
 dx = L/N;         % interval size
 dof = 2*N+1;      % degree of freedoms
+ap = 10.;         % applied force on the RHS end
 
 % test case 1 condition
 % u0 = 0; uend=0;
@@ -36,12 +37,14 @@ val = dx*dx*dx*[3*ones(N,1),-3*ones(N,1);-3*ones(N,1),3*ones(N,1)];
 A = A + sparse(Iu,Iv,val,dof,dof);
 
 % RHS
-Fk = dx
+F(dof) = ap; F = F';
 % Apply Boundary condition
-
-
+isBdary(dof) = true;
+free = find(~isBdary);
+A(N+1,:) = 0.;A(N+1,N+1) = 1;
+ai = inv(A);
 % Calculate results
-
+%u(free) = A(free,free)\F(free);
 
 % Error analysis
 

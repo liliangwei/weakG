@@ -32,7 +32,8 @@ free = find(~isBdary);
 d_s(free) = k_s(free,free)\f_s(free); % calculate the displacement
 
 figure
-plot(x,d_s);
+plot(x,d_s,'-bs','LineWidth',2);
+title('Displacement distribution for single domain');
 
 % Second part is multi-subdomain 
 
@@ -99,10 +100,11 @@ d2 = dinfi2+dker2;
 d3 = dinfi3+dker3;
 
 figure
-plot(x(1:5),d1,'r-');
+plot(x(1:5),d1,'-rs','LineWidth',3);
 hold on
-plot(x(5:9),d2,'g-');
+plot(x(5:9),d2,'--gs','LineWidth',2);
 hold on
-plot(x(9:13),d3,'y-');
+plot(x(9:13),d3,'-.ms','LineWidth',1);
 hold off
+title('Displacement distribution for multiple subdomains')
 
