@@ -23,25 +23,37 @@ T = [1:N]';
 
 % Assemble global matrix
 % Element stiffness matrix and load vector
-Ak = dx/6*[2,1;1,2];
+Dk = dx/6*[2,-1;-1,2]; 
+Zk = [1;1]; Tk = [1,0;0,1];
+Ak = 2/dx*[2,1;1,2];
 % Assemble global matrix
-for i=1:N
+Moo = Zk'*Ak*Zk;
+Mob = -Zk'*Ak*Tk; Mbo = Mob';
+Mbb = Tk'*Ak*Tk;
+A = A+sparse(T,T,Moo,dof,dof);
+Iu = [T,T]; Iv = [N+T,N+T+1];
+val = zeros(N,2);
+val(:,1) = Mob(1,1);val(:,2) = Mob(1,2);
+
+A = A+sparse(Iu,Iv,val,dof,dof);
+A = A+sparse(Iv,Iu,val',dof,dof);
+for i=N+1:dof-1
     for m=1:2
         for n=1:2
-   A(m+i-1,n+i-1) = A(m+i-1,n+i-1) + Ak(m,n);
+   A(m+i-1,n+i-1) = A(m+i-1,n+i-1) + Mbb(m,n);
         end
     end
-    A(i,N+i+1)=1;A(i+1,N+i+1)=-1;
-    A(N+i+1,i)=1;A(N+i+1,i+1)=-1;
 end
-A = -A;
+
 % RHS
 F(dof) = ap; F = F';
 % Apply Boundary condition
 isBdary(N+1) = true;
 free = find(~isBdary);
+
 % Calculate results
 u(free) = A(free,free)\F(free);
-% Error analysis
+
 figure
-plot(x,u(N+1:dof))
+plot(x,u(N+1:dof));
+grid on
