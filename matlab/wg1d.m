@@ -1,7 +1,6 @@
-% 1D Laplace equation mixed finite element method (weak Galerkin)
-% with Lagrangian multeplier
+% 1D linear elastic equation weak Galerkin finite element method
 % Starson
-% Sep 8
+
 
 close all
 clear all

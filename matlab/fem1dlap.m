@@ -1,7 +1,7 @@
 % 1D Poisson equation finite element method
 % Standard Galerkin method
 % Starson
-% Sep 6
+
 
 close all
 clear all
