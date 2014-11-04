@@ -9,7 +9,7 @@ format short e
 
 x0 = 0; x1 = 1;   % start and end point
 L = x1 - x0;      % total length
-N = 9;            % number of interval
+N = 3;            % number of interval
 dx = L/N;         % interval size
 ap = 10.;         % applied force on the RHS ending
 
@@ -48,3 +48,4 @@ plot(x,u);
 hold on
 %plot(x,u_exact,'r-');
 hold off
+grid on

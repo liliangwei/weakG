@@ -8,7 +8,7 @@ format short e
 
 x0 = 0; x1 = 1;   % start and end point
 L = x1 - x0;      % total length
-N = 10;          % number of interval
+N = 3;          % number of interval
 dx = L/N;         % interval size
 dof = 2*N+1;      % degree of freedoms
 ap = 10.;         % applied force on the RHS end
@@ -52,6 +52,30 @@ free = find(~isBdary);
 
 % Calculate results
 u(free) = A(free,free)\F(free);
+
+% ------------------------------------------------------------
+% A new implementation of element matrix
+
+newM = zeros(3,3);
+newM(1,1) = Mbb(1,1); newM(1,3) = Mbb(1,2); 
+newM(3,1) = Mbb(2,1); newM(3,3) = Mbb(2,2);
+newM(2,1) = Mbo(1,1); newM(3,2) = Mbo(2,1);
+newM(1,2) = Mob(1,1); newM(2,3) = Mbo(2,1);
+newM(2,2) = Moo(1,1);
+
+newA = zeros(dof,dof);
+for i=1:N
+    for p=1:3
+        for q=1:3
+            newA(p+(i-1)*2,q+(i-1)*2) = newA(p+(i-1)*2,q+(i-1)*2) + newM(p,q);
+        end
+    end
+end
+
+newu = zeros(1,dof); isBdary2 = false(dof,1);
+isBdary2(1) = true;
+nfree = find(~isBdary2);
+newu(nfree) = newA(nfree)\F(nfree);
 
 figure
 plot(x,u(N+1:dof));
