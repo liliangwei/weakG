@@ -8,7 +8,7 @@ format short e
 
 x0 = 0; x1 = 1;   % start and end point
 L = x1 - x0;      % total length
-N = 3;          % number of interval
+N = 40;          % number of interval
 dx = L/N;         % interval size
 dof = 2*N+1;      % degree of freedoms
 ap = 10.;         % applied force on the RHS end
@@ -75,7 +75,7 @@ end
 newu = zeros(1,dof); isBdary2 = false(dof,1);
 isBdary2(1) = true;
 nfree = find(~isBdary2);
-newu(nfree) = newA(nfree)\F(nfree);
+newu(nfree) = newA(nfree,nfree)\F(nfree);
 
 figure
 plot(x,u(N+1:dof));
