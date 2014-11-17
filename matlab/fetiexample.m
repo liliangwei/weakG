@@ -100,11 +100,11 @@ d2 = dinfi2+dker2;
 d3 = dinfi3+dker3;
 
 figure
-plot(x(1:5),d1,'-rs','LineWidth',3);
+plot(x(1:5),d1,'-bs','LineWidth',3);
 hold on
-plot(x(5:9),d2,'--gs','LineWidth',2);
+plot(x(5:9),d2,'--ys','LineWidth',2);
 hold on
-plot(x(9:13),d3,'-.ms','LineWidth',1);
+plot(x(9:13),d3,'-.ks','LineWidth',1);
 hold off
-title('Displacement distribution for multiple subdomains')
+title('Displacement distribution for multiple subdomains WG')
 

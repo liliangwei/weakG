@@ -8,7 +8,7 @@ format short e
 
 x0 = 0; x1 = 1;   % start and end point
 L = x1 - x0;      % total length
-N = 2;          % number of interval
+N = 5;          % number of interval
 dx = L/N;         % interval size
 dof = 2*N+1;      % degree of freedoms
 ap = 10.;         % applied force on the RHS end
@@ -26,7 +26,7 @@ Dk = dx/6*[2,-1;-1,2];
 Zk = [1;1]; Tk = [1,0;0,1];
 Ak = 2/dx*[2,1;1,2];
 % Assemble global matrix
-Moo = Zk'*Ak*Zk;
+Moo = Zk'*Ak*Zk + Zk'*Ak*Zk;
 Mob = -Zk'*Ak*Tk; Mbo = Mob';
 Mbb = Tk'*Ak*Tk;
 A = A+sparse(T,T,Moo,dof,dof);
